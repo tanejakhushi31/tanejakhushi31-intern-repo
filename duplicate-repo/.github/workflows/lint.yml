@@ -1,0 +1,23 @@
+name: Lint & Spell Check
+
+on: [pull_request, push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run markdownlint
+        uses: nosborn/github-action-markdown-cli@v3
+        with:
+          files: "**/*.md"
+
+  spell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run spell check
+        uses: rojopolis/spellcheck-github-actions@0.33.1
+        with:
+          config_path: .spellcheck.yml
+
